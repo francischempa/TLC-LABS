@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+    <file>
+        <filename>c# programming</filename>
+        <type>RegularFile</type>
+        <size>400</size>
+        <owner>kwaku</owner>
+        <permission> 
+            <user> 
+                <read>True</read>
+                <write>True</write>
+                <execute>False</execute>
+            </user>
+            <group>
+                <read>True</read>
+                <write>True</write>
+                <execute>False</execute>
+            </group>
+            <other>
+                <read>True</read>
+                <write>True</write>
+                <execute>False</execute>
+            </other>
+        </permission>
+    </file>
+    
+    <file>
+        <filename>c++ programming</filename>
+        <type>DirectoryFile</type>
+        <size>10</size>
+        <owner>kwesi</owner>
+        <permission> 
+            <user> 
+                <read>True</read>
+                <write>True</write>
+                <execute>False</execute>
+            </user>
+            <group>
+                <read>True</read>
+                <write>True</write>
+                <execute>False</execute>
+            </group>
+            <other>
+                <read>True</read>
+                <write>True</write>
+                <execute>False</execute>
+            </other>
+        </permission>
+    </file> 
+</root>
+
+
+<!--
+file
+    filename
+    size
+    owner
+    permission
+    
+file
+    c# programming
+    400 mb
+    kwaku
+    rwxrwxrwx
+file
+    c++ programming
+    10 mb
+    kwesi
+    rwxrwx_ _ _
+    
+-->

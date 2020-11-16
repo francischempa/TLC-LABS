@@ -1,0 +1,10 @@
+/home/chempa/Projects/DelegatesAndEvents/DelegatesAndEvents/bin/Debug/DelegatesAndEvents.exe
+/home/chempa/Projects/DelegatesAndEvents/DelegatesAndEvents/bin/Debug/DelegatesAndEvents.pdb
+/home/chempa/Projects/DelegatesAndEvents/DelegatesAndEvents/bin/Debug/nunit.framework.dll
+/home/chempa/Projects/DelegatesAndEvents/DelegatesAndEvents/bin/Debug/nunit.framework.pdb
+/home/chempa/Projects/DelegatesAndEvents/DelegatesAndEvents/bin/Debug/nunit.framework.xml
+/home/chempa/Projects/DelegatesAndEvents/DelegatesAndEvents/obj/x86/Debug/DelegatesAndEvents.csprojAssemblyReference.cache
+/home/chempa/Projects/DelegatesAndEvents/DelegatesAndEvents/obj/x86/Debug/DelegatesAndEvents.csproj.CoreCompileInputs.cache
+/home/chempa/Projects/DelegatesAndEvents/DelegatesAndEvents/obj/x86/Debug/DelegatesAndEvents.csproj.CopyComplete
+/home/chempa/Projects/DelegatesAndEvents/DelegatesAndEvents/obj/x86/Debug/DelegatesAndEvents.exe
+/home/chempa/Projects/DelegatesAndEvents/DelegatesAndEvents/obj/x86/Debug/DelegatesAndEvents.pdb

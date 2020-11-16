@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<directory>
+	<file>
+		<name>play</name> 
+		<fileType>directoryFile</fileType>
+		<permission>
+			<user>
+				<read>True</read>
+				<write>True</write>
+				<execute>False</execute>
+			</user>
+			<group>
+				<read>True</read>
+				<write>True</write>
+				<execute>False</execute>
+			</group>
+			<other>
+				<read>True</read>
+				<write>False</write>
+				<execute>False</execute>
+			</other>
+		</permission>
+		<linkCounts>2</linkCounts>
+		<owner>evad</owner>
+		<group>cc3591</group>
+		<size unit="byte" >8192</size>
+		<lastModifiedDate>
+			<day>29</day>
+			<month>October</month>
+			<year>2001</year>
+		</lastModifiedDate>
+	</file>
+	<file>
+		<name>play</name> 
+		<fileType>regularFile</fileType>
+		<permission>
+			<user>
+				<read>True</read>
+				<write>True</write>
+				<execute>False</execute>
+			</user>
+			<group>
+				<read>True</read>
+				<write>True</write>
+				<execute>False</execute>
+			</group>
+			<other>
+				<read>True</read>
+				<write>False</write>
+				<execute>False</execute>
+			</other>
+		</permission>
+		<linkCounts>2</linkCounts>
+		<owner>evad</owner>
+		<group>cc3591</group>
+		<size unit="byte" >8192</size>
+		<lastModifiedDate>
+			<day>29</day>
+			<month>October</month>
+			<year>2001</year>
+		</lastModifiedDate>
+	</file>
+</directory>

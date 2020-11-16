@@ -1,0 +1,8 @@
+/home/chempa/Projects/Group8/Group8/bin/Release/Group8.exe
+/home/chempa/Projects/Group8/Group8/bin/Release/nunit.framework.dll
+/home/chempa/Projects/Group8/Group8/bin/Release/nunit.framework.pdb
+/home/chempa/Projects/Group8/Group8/bin/Release/nunit.framework.xml
+/home/chempa/Projects/Group8/Group8/obj/x86/Release/Group8.csproj.CoreCompileInputs.cache
+/home/chempa/Projects/Group8/Group8/obj/x86/Release/Group8.csproj.CopyComplete
+/home/chempa/Projects/Group8/Group8/obj/x86/Release/Group8.exe
+/home/chempa/Projects/Group8/Group8/obj/x86/Release/Group8.csprojAssemblyReference.cache

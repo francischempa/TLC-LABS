@@ -1,0 +1,25 @@
+<?xml version = "1.0" encoding = "UTF-8" standalone = "no" ?>
+<!--<!DOCTYPE businessTrips SYSTEM "bt.dtd">-->
+<!--<businessTrips>-->
+<!--	<trip>-->
+<!--		<expenses>-->
+<!--			<expense category="FOOD" >  -->
+<!--				<payment currency="GHS" amount="500.99" method="VISA"/> -->
+<!--			</expense>-->
+<!--			<expense category="CLOTH" >  -->
+<!--				<payment currency="GHS" amount="990.99" method="CASH"/> -->
+<!--			</expense>-->
+<!--		</expenses>-->
+<!--		<date day="1" month="JAN" year="2020" /> -->
+<!--	</trip>-->
+<!--	<trip>-->
+<!--		-->
+<!--	</trip>-->
+<!--</businessTrips>-->
+
+<note color="red">
+	<to>Tove</to>
+	<from>Jani</from>
+	<heading>Reminder</heading>
+	<body>Don't forget me this weekend</body>
+</note>

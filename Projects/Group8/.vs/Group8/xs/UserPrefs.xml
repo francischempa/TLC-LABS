@@ -1,0 +1,37 @@
+﻿<Properties StartupConfiguration="{652DB873-36D7-4EA4-98A3-A1560207FFBA}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Group8/Timer.cs">
+    <Files>
+      <File FileName="../../MonoDevelop/Test/Test/TestProgram.cs" Line="57" Column="1" />
+      <File FileName="Group8/TestStudent.cs" Line="46" Column="15" />
+      <File FileName="Group8/Student.cs" Line="29" Column="14" />
+      <File FileName="Group8/Program.cs" Line="9" Column="31" />
+      <File FileName="Group8/Person.cs" Line="7" Column="9" />
+      <File FileName="Group8/Instructor.cs" Line="16" Column="1" />
+      <File FileName="Group8/Timer.cs" Line="46" Column="9" />
+      <File FileName="Group8/Timer2.cs" Line="14" Column="39" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Group8" expanded="True">
+            <Node name="Group8" expanded="True">
+              <Node name="Timer.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.UnitTesting.TestPad">
+        <State name="__root__">
+          <Node name="Group8" expanded="True" selected="True" />
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release|x86" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Group8 PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>

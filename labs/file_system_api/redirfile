@@ -1,0 +1,14 @@
+total 228
+drwxrwxr-x  2 chempa chempa   4096 Oct  8 17:31 .
+drwxrwxr-x 12 chempa chempa   4096 Oct  6 15:03 ..
+-rw-rw-r--  1 chempa chempa  33016 Oct  6 13:15 a.out
+-r--r--r--  1 chempa chempa      0 Oct  6 13:15 asdf
+-rw-rw-r--  1 chempa chempa  11252 Oct  6 13:15 file
+-rw-rw-r--  1 chempa chempa     42 Oct  6 13:15 file2
+-rw-rw-r--  1 chempa chempa     48 Oct  6 13:15 file4
+-rw-rw-r--  1 chempa chempa   1142 Oct  6 13:15 file.C
+-rw-rw-r--  1 chempa chempa  18392 Oct  6 13:15 ls
+-rwx------  1 chempa chempa 127032 Oct  6 13:15 myshell
+-rw-rw-r--  1 chempa chempa   1611 Oct  6 13:15 que2.C
+-rw-------  1 chempa chempa      0 Oct  8 17:31 redirfile
+-rw-rw-r--  1 chempa chempa   7693 Oct  6 13:15 shell.C

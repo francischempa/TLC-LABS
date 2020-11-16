@@ -1,0 +1,8 @@
+<!ELEMENT businessTrips (trip)>
+<!ELEMENT trip (expenses)>
+<!ELEMENT expenses (expense+)>
+<!ATTLIST expense category CDATA #REQUIRED>
+<!ELEMENT payment (EMPTY)>
+<!ATTLIST payment currency CDATA #REQUIRED>
+<!ATTLIST payment amount CDATA #REQUIRED>
+<!ATTLIST payment method CDATA #REQUIRED>

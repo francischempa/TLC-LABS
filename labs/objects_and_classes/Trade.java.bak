@@ -1,0 +1,47 @@
+// import static org.junit.jupiter.api.Assertions.assertEquals;
+// import org.junit.jupiter.api.Test;
+
+public class Trade{
+
+    private String id;
+    private String symbol;
+    private int quantity;
+    public double price;
+    static int count=0;
+
+    public Trade(String id, String symbol, int qty, double price){
+        count++;
+        this.id = id;
+        this.symbol = symbol;
+        this.quantity = qty;
+        this.price = price;
+    }
+    public Trade(String id, String symbol, int qty){
+        count++;
+        this.id = id;
+        this.symbol = symbol;
+        this.quantity = qty; 
+    }
+
+    public void setPrice(double price){
+        if(price >= 0){
+            this.price = price;
+        }else{
+            System.out.println("Sorry price can't be a negative value!");
+        }
+    }
+    
+
+    public String toString(){
+        return (  "id="  +   id  +   ", symbol="     +  symbol  +  ", qty=" +quantity+", price="+price);
+    }
+
+    public static void main(String[] args){ 
+        Trade t1 = new Trade("T1", "APPL", 100);
+        System.out.println(t1.toString());
+        t1.setPrice(-100.99);
+        System.out.println(t1.toString());
+
+    }
+}
+
