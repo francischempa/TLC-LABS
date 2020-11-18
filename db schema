@@ -1,0 +1,58 @@
+User
+id	name	balance		
+01	comet	50000.00
+
+
+Products
+p_id 	ticker
+
+01	IBM
+02	TSLA
+
+PortfolioContent
+id	port_id_FK	p_id_FK	qty
+
+01	01		02		1000
+02	01		01		500
+
+
+Portfolio
+
+port_id  	name	u_id_FK	
+
+01		TECH	01
+02		SOCIAL	01
+
+
+
+
+Order
+id	product_id	side	stated_price	Qty 	u_id
+
+01	001		sell	5.00		4000	01
+
+
+
+
+PeerTransactions
+id	order_id	price	qty	exchange_id		status[pending,executed,cancelled_by_user,cancelled_by_disconnect,Failed_Exchange]		
+
+01	01		1.1	16	01			NULL
+
+
+
+
+cancelOrder
+{
+	id
+	order_id
+	pt_id
+}
+
+
+
+
+
+
+
+
