@@ -1,10 +1,10 @@
-package com.exchangeconnectivity.exchangeconnectivity;
+package com.marketdata.marketdata;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ExchangeconnectivityApplicationTests {
+class MarketdataApplicationTests {
 
 	@Test
 	void contextLoads() {

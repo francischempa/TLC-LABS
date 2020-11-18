@@ -1,5 +1,6 @@
 package com.tradeengine.trade.engine;
 
+import com.tradeengine.trade.engine.taskqueues.CancelOrderQueue;
 import com.tradeengine.trade.engine.taskqueues.MakeOrderQueue;
 import com.tradeengine.trade.engine.taskqueues.OrderMonitorQueue;
 import com.tradeengine.trade.engine.trademodels.Order;
@@ -19,7 +20,7 @@ public class TradeEngineApplication {
 
 		queuesExecutorService.execute(new MakeOrderQueue());
 		queuesExecutorService.execute(new OrderMonitorQueue());
-//		queuesExecutorService.execute(new CancelOrderQueue());
+		queuesExecutorService.execute(new CancelOrderQueue());
 
 
 //		Order order = UtilsComet.convertToObject(data,Order.class);

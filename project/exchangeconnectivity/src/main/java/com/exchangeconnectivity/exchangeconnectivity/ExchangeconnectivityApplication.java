@@ -15,7 +15,7 @@ public class ExchangeconnectivityApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ExchangeconnectivityApplication.class, args);
-		ExecutorService queuesExecutorService = Executors.newFixedThreadPool(Config.getNumberOfTaskQueues());
+		ExecutorService queuesExecutorService = Executors.newFixedThreadPool(UtilsComet.numberOfTaskQueues);
 
 		queuesExecutorService.execute(new MakeOrderQueue());
 		queuesExecutorService.execute(new OrderBookQueue());

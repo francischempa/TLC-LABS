@@ -2,15 +2,15 @@ package com.exchangeconnectivity.exchangeconnectivity.tasks;
 
 import java.io.Serializable;
 
-public class OrderBookTask implements Serializable {
+public class OrderBookRequest implements Serializable {
     private String id;
     private String product;
     private String side;
 
-    public OrderBookTask() {
+    public OrderBookRequest() {
     }
 
-    public OrderBookTask(String id, String product, String side) {
+    public OrderBookRequest(String id, String product, String side) {
         this.id = id;
         this.product = product;
         this.side = side;

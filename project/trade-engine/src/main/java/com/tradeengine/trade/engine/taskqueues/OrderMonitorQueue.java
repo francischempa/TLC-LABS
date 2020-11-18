@@ -22,38 +22,34 @@ public class OrderMonitorQueue implements Runnable{
     @Override
     public void run() {
         while (true){
-            String orderHash = UtilsComet.getFromQueue(Config.getOrderMonitorQueue(),jedis);
-            if(orderHash == null) continue;
-            long numberOfResults = UtilsComet.getQueueLen(orderHash + "orderbook",jedis);
+            String orderId = UtilsComet.getFromQueue(Config.getOrderMonitorQueue(),jedis);
+            if(orderId == null) continue;
+            long numberOfResults = UtilsComet.getQueueLen(orderId + "orderbook",jedis);
             if(numberOfResults == Config.numberOfExchanges){ // IS RESPONSE EQUAL THE NUMBER OF EXCHANGES
-                String data = UtilsComet.getCacheValue(orderHash+"monitor",jedis);
+                String data = UtilsComet.getCacheValue(orderId+"monitor",jedis);
                 ValidatedOrder validatedOrder = UtilsComet.convertToObject(data,ValidatedOrder.class);
-                UtilsComet.deleteData(orderHash+"monitor",jedis);
+                UtilsComet.deleteData(orderId+"monitor",jedis);
 
                 List<ExchangeOrder> exchangeOrderList = new ArrayList<>();
                 for (int index = 0;index<Config.numberOfExchanges;index++){
-                    data = UtilsComet.getFromQueue(orderHash + "orderbook",jedis);
+                    data = UtilsComet.getFromQueue(orderId + "orderbook",jedis);
                     ExchangeOrder[] exchangeOrders = UtilsComet.convertToObject(data,ExchangeOrder[].class);
                     exchangeOrderList.addAll(Arrays.asList(exchangeOrders));
                 }
-                UtilsComet.deleteData(orderHash + "orderbook",jedis);
-
-                System.out.println("#111");
-                System.out.println(exchangeOrderList);
+                UtilsComet.deleteData(orderId + "orderbook",jedis);
 
                 final double orderPrice = validatedOrder.getPrice();
+
+//                #fixme;
                 switch (validatedOrder.getSide().toUpperCase()){
                     case "BUY":{
-                        exchangeOrderList = exchangeOrderList.stream().sorted((o1, o2) -> Double.compare(o1.getPrice(),o2.getPrice())).filter(exchangeOrder -> exchangeOrder.getPrice() >= orderPrice).peek(exchangeOrder -> exchangeOrder.setSide("BUY")).collect(Collectors.toList());
+                        exchangeOrderList = exchangeOrderList.stream().sorted((o1, o2) -> Double.compare(o1.getPrice(),o2.getPrice())).filter(exchangeOrder -> exchangeOrder.getPrice() <= orderPrice).peek(exchangeOrder -> exchangeOrder.setSide("BUY")).collect(Collectors.toList());
                     }break;
                     case "SELL":{
                         exchangeOrderList = exchangeOrderList.stream().sorted((o1, o2) -> Double.compare(o2.getPrice(),o1.getPrice())).filter(exchangeOrder -> exchangeOrder.getPrice() >= orderPrice).peek(exchangeOrder -> exchangeOrder.setSide("SELL")).collect(Collectors.toList());
                     }break;
                     default:{}
                 }
-
-                System.out.println("#222");
-                System.out.println(exchangeOrderList);
 
                 if(exchangeOrderList.size() == 0){ // NO DEAL AVAILABLE ON ALL EXCHANGES
                     UtilsComet.addToQueue(Config.getMakeOrderQueueFromOvToTe(),UtilsComet.convertToString(validatedOrder),jedis); // add as a new order from order validator
@@ -68,16 +64,22 @@ public class OrderMonitorQueue implements Runnable{
                     if (availableQty >= qtyNeeded) {
                         exchangeOrder.setQuantity(qtyNeeded);
                         selectedOrders.add(exchangeOrder);
+                        qtyNeeded = 0;
                         break;
                     }
                     exchangeOrder.setQuantity(availableQty);
                     selectedOrders.add(exchangeOrder);
                     qtyNeeded -= availableQty;
                 }
-//                #fixme, qtyNeeded could be positive (currently ignored)
 
-                System.out.println("#333");
-                System.out.println(selectedOrders);
+
+//                PROCESS REMAINING ORDER
+                if(qtyNeeded>0){
+                    ExchangeOrder exchangeOrder = new ExchangeOrder(validatedOrder.getProduct(),qtyNeeded,validatedOrder.getPrice(),validatedOrder.getSide(),0);
+                    selectedOrders.add(exchangeOrder);
+                }
+
+//                #fixme, qtyNeeded could be positive (currently ignored)
 
                 for (ExchConnectivity exchConnectivity : Config.exchConnectivityList) {
                     List<ExchangeOrder> exchangeSpecificOrders = selectedOrders.stream().filter(exchangeOrder -> exchangeOrder.getExchange().equals(exchConnectivity.getId())).collect(Collectors.toList());
@@ -91,21 +93,21 @@ public class OrderMonitorQueue implements Runnable{
                                     int quantity = optionalQuantity.get();
                                     ExchangeOrder exchangeOrder = new ExchangeOrder(eo.getProduct(),quantity,eo.getPrice(),eo.getSide(),0);
                                     exchangeOrder.setExchange(exchConnectivity.getId());
-                                    UtilsComet.addToQueue(orderHash+ ":" +exchConnectivity.getId()+":makeorder",UtilsComet.convertToString(exchangeOrder),jedis);
-                                    UtilsComet.addToQueue(exchConnectivity.getMakeOrderQueueKey(),orderHash + ":" + exchConnectivity.getId()+":makeorder",jedis);
+                                    UtilsComet.addToQueue(orderId+ ":" +exchConnectivity.getId()+":makeorder",UtilsComet.convertToString(exchangeOrder),jedis);
+                                    UtilsComet.addToQueue(exchConnectivity.getMakeOrderQueueKey(),orderId + ":" + exchConnectivity.getId()+":makeorder",jedis);
                                 }
                             }
                     );
                     ExchangeOrder exchangeOrder = new ExchangeOrder(validatedOrder.getProduct(),0,0,validatedOrder.getSide(),0);
                     exchangeOrder.setExchange(exchConnectivity.getId());
-                    UtilsComet.addToQueue(orderHash+ ":" +exchConnectivity.getId()+":makeorder",UtilsComet.convertToString(exchangeOrder),jedis);
-                    UtilsComet.addToQueue(exchConnectivity.getMakeOrderQueueKey(),orderHash + ":" + exchConnectivity.getId()+":makeorder",jedis);
+                    UtilsComet.addToQueue(orderId+ ":" +exchConnectivity.getId()+":makeorder",UtilsComet.convertToString(exchangeOrder),jedis);
+                    UtilsComet.addToQueue(exchConnectivity.getMakeOrderQueueKey(),orderId + ":" + exchConnectivity.getId()+":makeorder",jedis);
 
                 }
 //                while (true){}
 
             }else{//ALL RESULTS NOT READY; PUT TASK BACK INTO QUEUE
-                UtilsComet.addToQueue(Config.getOrderMonitorQueue(),orderHash,jedis);
+                UtilsComet.addToQueue(Config.getOrderMonitorQueue(),orderId,jedis);
             }
         }
     }

@@ -32,38 +32,41 @@ public class MakeOrderQueue implements Runnable {
 //        UtilsComet.addToQueue(Config.getMakeOrderQueueFromOvToTe(),"order3");
 
 
-        String rawValidatedOrderTask;
+        String rawValidatedOrder;
 
         while (true){
 
-            String taskKey = UtilsComet.getFromQueue(Config.getMakeOrderQueueFromOvToTe(),jedis);
-            if(taskKey == null) continue;
-            rawValidatedOrderTask = UtilsComet.getCacheValue(taskKey,jedis);
-            UtilsComet.deleteData(taskKey,jedis);
+            String orderId = UtilsComet.getFromQueue(Config.getMakeOrderQueueFromOvToTe(),jedis);
+            if(orderId == null) continue;
+            rawValidatedOrder = UtilsComet.getCacheValue(orderId,jedis);
+            UtilsComet.deleteData(orderId,jedis);
 
-            if(rawValidatedOrderTask==null) {
+            if(rawValidatedOrder==null) {
 //                ORDER POSSIBLY DELETED WHILES IN QUEUE
                 continue;
-            };
-            ValidatedOrder validatedOrder = UtilsComet.convertToObject(rawValidatedOrderTask,ValidatedOrder.class);
-            String orderBookTaskString = UtilsComet.convertToString(new OrderBookTask(validatedOrder.getId(),validatedOrder.getProduct(),validatedOrder.getSide()));
+            }
+            ValidatedOrder validatedOrder = UtilsComet.convertToObject(rawValidatedOrder,ValidatedOrder.class);
+            String orderBookTaskRequest = UtilsComet.convertToString(new OrderBookTask(validatedOrder.getId(),validatedOrder.getProduct(),validatedOrder.getSide()));
 
-            String orderTypeStatus = UtilsComet.getCacheValue(validatedOrder.getOrderType(),jedis);
+//            String orderTypeStatus = UtilsComet.getCacheValue(validatedOrder.getOrderType(),jedis);
             if( !UtilsComet.isOrderTypeInQueue(validatedOrder,jedis) ) {
                 UtilsComet.putOrderTypeInQueue(validatedOrder,jedis);
+                System.out.printf("Order Received: %s%n",orderBookTaskRequest);
 
-                UtilsComet.setCacheValue(validatedOrder.getId()+"monitor",rawValidatedOrderTask,jedis);
+                UtilsComet.setCacheValue(validatedOrder.getId()+"monitor",rawValidatedOrder,jedis);
                 UtilsComet.addToQueue(Config.getOrderMonitorQueue(),validatedOrder.getId(),jedis);
 
                 for (ExchConnectivity exchConnectivity : Config.exchConnectivityList) {
+                    System.out.printf("Order Sent to: %s%n",exchConnectivity.getId());
                     if (true) { // Exchanges Allowed to be used by admins
-                        UtilsComet.setCacheValue(validatedOrder.getId()+exchConnectivity.getId(), orderBookTaskString,jedis);
+                        UtilsComet.setCacheValue(validatedOrder.getId()+exchConnectivity.getId(), orderBookTaskRequest,jedis);
                         UtilsComet.addToQueue(exchConnectivity.getOrderBookQueueKey(), validatedOrder.getId()+exchConnectivity.getId(),jedis);
                     }
                 }
             }else{
-                UtilsComet.setCacheValue(taskKey,rawValidatedOrderTask,jedis);
-                UtilsComet.addToQueue(Config.getMakeOrderQueueFromOvToTe(),taskKey,jedis);
+//                ORDER TYPE IN QUEUE: PUT TASK BACK INTO QUEUE
+                UtilsComet.setCacheValue(orderId,rawValidatedOrder,jedis);
+                UtilsComet.addToQueue(Config.getMakeOrderQueueFromOvToTe(),orderId,jedis);
             }
 //            while (true){}
         }

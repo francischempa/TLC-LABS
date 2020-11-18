@@ -1,7 +1,6 @@
 package com.exchangeconnectivity.exchangeconnectivity.responses;
 
 import com.exchangeconnectivity.exchangeconnectivity.exchangemodels.ExchangeOrder;
-import com.exchangeconnectivity.exchangeconnectivity.tasks.OrderBookTask;
 
 import java.util.List;
 

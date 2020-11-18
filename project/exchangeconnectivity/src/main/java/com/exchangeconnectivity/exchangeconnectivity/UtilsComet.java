@@ -8,19 +8,20 @@ import org.springframework.web.reactive.function.client.WebClient;
 import redis.clients.jedis.Jedis;
 
 public class UtilsComet {
+    public static ExchConnectivity service = new ExchConnectivity("exch1");
+    public static int numberOfTaskQueues = 4;
+    public static String redisAddress = "localhost";
+    public static String orderBookBasesUrl = "https://exchange.matraining.com";
     public static String API_KEY = "2e3a035d-f570-4472-8e17-90ddcb1c498e";
-    public static final WebClient exchangeWebClient = WebClient.builder().baseUrl(Config.getOrderBookBasesUrl()).defaultHeader("Content-Type", "application/json").build();
+
+    public static final WebClient exchangeWebClient = WebClient.builder().baseUrl(UtilsComet.orderBookBasesUrl).defaultHeader("Content-Type", "application/json").build();
 //    public static final Jedis jedis = new Jedis(Config.getRedisAddress());
     public static  <T> T  convertToObject(String data, Class<T> type){
         ObjectMapper objectMapper = new ObjectMapper();
         T t = null;
         try {
             t = objectMapper.readValue(data, type);
-        } catch (JsonMappingException e) {
-            e.printStackTrace();
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+        } catch (JsonProcessingException ignore) {}
         return t;
     }
     public static <T> String convertToString(T t){

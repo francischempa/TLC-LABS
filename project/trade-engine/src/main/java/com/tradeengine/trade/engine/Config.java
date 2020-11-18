@@ -7,14 +7,14 @@ import java.util.List;
 
 public class Config {
 
-    public static int numberOfExchanges = 2;
+    public static int numberOfExchanges = 1;
 
     public static int numberOfTaskQueues = 4;
 
     public static List<ExchConnectivity> exchConnectivityList = new ArrayList<>();
     static {
         exchConnectivityList.add(new ExchConnectivity("exch1"));
-        exchConnectivityList.add(new ExchConnectivity("exch2"));
+//        exchConnectivityList.add(new ExchConnectivity("exch2"));
     }
 
     //    QUEUES USED BY TRADE ENGINE
