@@ -6,8 +6,15 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.reactive.function.client.WebClient;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPubSub;
 
-public class UtilsComet {
+public class
+
+
+
+
+
+UtilsComet {
     public static ExchConnectivity service = new ExchConnectivity("exch1");
     public static int numberOfTaskQueues = 4;
     public static String redisAddress = "localhost";
@@ -66,5 +73,13 @@ public class UtilsComet {
 
     public static void addToQueue(String queueName, String data,Jedis jedis){
         jedis.lpush(queueName, data);
+    }
+
+    public static void subscribe(JedisPubSub jedisPubSub,Jedis jedis,  String... channels){
+        jedis.subscribe(jedisPubSub,channels);
+    }
+
+    public static <T> void publish(String channel, T data,Jedis jedis){
+        jedis.publish(channel,convertToString(data));
     }
 }

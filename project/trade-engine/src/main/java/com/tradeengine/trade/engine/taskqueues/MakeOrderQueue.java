@@ -18,10 +18,9 @@ public class MakeOrderQueue implements Runnable {
 
     @Override
     public void run() {
-//        ValidatedOrder validatedOrder1 = new ValidatedOrder("order1","IBM",100,1.5,"BUY");
-//        String data = "{\"id\":\"order1\",\"product\":\"nflx\",\"quantity\":1000,\"price\":1,\"side\":\"BUY\"}";
-//        UtilsComet.setCacheValue("order1",data);
-//        UtilsComet.addToQueue(Config.getMakeOrderQueueFromOvToTe(),"order1");
+        String data = "{\"id\":\"102\",\"product\":\"AAPL\",\"quantity\":1,\"price\":2,\"side\":\"SELL\"}";
+        UtilsComet.setCacheValue("102",data,jedis);
+        UtilsComet.addToQueue(Config.getMakeOrderQueueFromOvToTe(),"102",jedis);
 
 //        data = "{\"id\":\"order2\",\"product\":\"IBM\",\"quantity\":100,\"price\":1.5,\"side\":\"SELL\"}";
 //        UtilsComet.setCacheValue("order2",data);
@@ -40,11 +39,12 @@ public class MakeOrderQueue implements Runnable {
             if(orderId == null) continue;
             rawValidatedOrder = UtilsComet.getCacheValue(orderId,jedis);
             UtilsComet.deleteData(orderId,jedis);
-
+//            System.out.println(orderId);
             if(rawValidatedOrder==null) {
 //                ORDER POSSIBLY DELETED WHILES IN QUEUE
                 continue;
             }
+//            System.out.println(rawValidatedOrder);
             ValidatedOrder validatedOrder = UtilsComet.convertToObject(rawValidatedOrder,ValidatedOrder.class);
             String orderBookTaskRequest = UtilsComet.convertToString(new OrderBookTask(validatedOrder.getId(),validatedOrder.getProduct(),validatedOrder.getSide()));
 

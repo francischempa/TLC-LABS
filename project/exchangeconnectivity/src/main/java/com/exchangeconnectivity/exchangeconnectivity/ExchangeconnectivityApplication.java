@@ -1,6 +1,6 @@
 package com.exchangeconnectivity.exchangeconnectivity;
 
-import com.exchangeconnectivity.exchangeconnectivity.taskqueues.CancelOrderQueue;
+import com.exchangeconnectivity.exchangeconnectivity.subscribers.Subscriber;
 import com.exchangeconnectivity.exchangeconnectivity.taskqueues.MakeOrderQueue;
 import com.exchangeconnectivity.exchangeconnectivity.taskqueues.OrderBookQueue;
 import com.exchangeconnectivity.exchangeconnectivity.taskqueues.OrderMonitorQueue;
@@ -19,8 +19,8 @@ public class ExchangeconnectivityApplication {
 
 		queuesExecutorService.execute(new MakeOrderQueue());
 		queuesExecutorService.execute(new OrderBookQueue());
-//		queuesExecutorService.execute(new OrderMonitorQueue());
-//		queuesExecutorService.execute(new CancelOrderQueue());
+		queuesExecutorService.execute(new OrderMonitorQueue());
+		queuesExecutorService.execute(new Subscriber());
 
 	}
 

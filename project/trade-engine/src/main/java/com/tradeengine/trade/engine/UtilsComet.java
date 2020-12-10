@@ -63,4 +63,9 @@ public class UtilsComet {
     public static void addToQueue(String queueName, String data,Jedis jedis){
         jedis.lpush(queueName, data);
     }
+
+    public static <T> void publish(String channel, T data,Jedis jedis){
+        jedis.publish(channel,convertToString(data));
+    }
+
 }

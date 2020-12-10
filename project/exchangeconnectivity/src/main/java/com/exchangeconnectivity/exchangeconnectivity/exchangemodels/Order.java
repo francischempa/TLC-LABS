@@ -5,19 +5,29 @@ import com.exchangeconnectivity.exchangeconnectivity.UtilsComet;
 import java.io.Serializable;
 
 public class Order implements Serializable,Blockable {
+    private String id;
     private String product;
     private int quantity;
     private double price;
     private String side;
 
-    public Order() {
-    }
-
-    public Order(String product, int quantity, double price, String side) {
+    public Order(String id, String product, int quantity, double price, String side) {
+        this.id = id;
         this.product = product;
         this.quantity = quantity;
         this.price = price;
         this.side = side;
+    }
+
+    public Order() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getProduct() {
@@ -59,4 +69,6 @@ public class Order implements Serializable,Blockable {
     public String getOrderType() {
         return product+":"+side;
     }
+
+
 }

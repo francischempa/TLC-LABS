@@ -10,6 +10,7 @@ public class MarketDataService {
     Jedis jedis = new Jedis();
     @PostMapping("/comet/md/update/{exchange}")
     public void update(@PathVariable String exchange, @RequestBody String marketdata){
-        UtilsComet.addToQueue("queue:md:"+exchange,marketdata,jedis);
+        UtilsComet.publish("marketdata:"+exchange,marketdata,jedis);
+        System.out.println(marketdata);
     }
 }

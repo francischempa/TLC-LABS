@@ -1,10 +1,12 @@
 package com.exchangeconnectivity.exchangeconnectivity.exchangemodels;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ExchangeOrder implements Serializable ,Blockable{
+    private String id;
     private String product;
     private int quantity;
     private double price;
@@ -15,12 +17,32 @@ public class ExchangeOrder implements Serializable ,Blockable{
     public ExchangeOrder() {
     }
 
-    public ExchangeOrder(String product, int quantity, double price, String side, int cumulativeQuantity) {
+    public ExchangeOrder(ExchangeOrder other) {
+        this.id = other.id;
+        this.product = other.product;
+        this.quantity = other.quantity;
+        this.price = other.price;
+        this.side = other.side;
+        this.cumulativeQuantity = other.cumulativeQuantity;
+        this.exchange = other.exchange;
+    }
+
+    public ExchangeOrder(String id, String product, int quantity, double price, String side, int cumulativeQuantity, String exchange) {
+        this.id = id;
         this.product = product;
         this.quantity = quantity;
         this.price = price;
         this.side = side;
         this.cumulativeQuantity = cumulativeQuantity;
+        this.exchange = exchange;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getExchange() {
@@ -67,6 +89,7 @@ public class ExchangeOrder implements Serializable ,Blockable{
         return side;
     }
 
+    @JsonProperty("cumulatitiveQuantity")
     public int getCumulativeQuantity() {
         return cumulativeQuantity;
     }

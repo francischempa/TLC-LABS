@@ -3,7 +3,9 @@ package com.exchangeconnectivity.exchangeconnectivity;
 public class ExchConnectivity implements Comparable {
     private String id;
 
-    public String getOrder
+    public String getOrderMonitor(){
+        return "queue:"+id+":"+id+":monitor";
+    }
 
     public String getOrderBookQueueKey(){
         return "queue:te:" + id + ":orderbook";
